@@ -30,14 +30,20 @@ setup(name='bb.extjs.wsgi',
       license='gpl',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
-      namespace_packages=['bb'],
+      namespace_packages=['bb', 'bb.extjs'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Paste',
+          'PasteDeploy',
+          'waitress',
+          'werkzeug'
           # -*- Extra requirements: -*-
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      entry_points={
+          'console_scripts': ['serve = bb.extjs.wsgi.server:run'],
+          'paste.app_factory' : ['main = bb.extjs.wsgi.server:make_app',
+                                 'debug = bb.extjs.wsgi.server:make_debug']
+      },
       )
