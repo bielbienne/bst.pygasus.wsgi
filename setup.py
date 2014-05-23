@@ -38,7 +38,8 @@ setup(name='bb.extjs.wsgi',
           'Paste',
           'PasteDeploy',
           'waitress',
-          'werkzeug'
+          'werkzeug',
+          'transaction'
           # -*- Extra requirements: -*-
       ],
       entry_points={
