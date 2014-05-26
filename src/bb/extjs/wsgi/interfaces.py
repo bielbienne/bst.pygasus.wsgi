@@ -2,8 +2,8 @@ from zope import interface
 
 
 class IRootDispatcher(interface.Interface):
-    
-    target = interface.Attribute('name of url target that will dispatch for.')
+    """ 
+    """
     
     def __init__(self, request, response):
         """

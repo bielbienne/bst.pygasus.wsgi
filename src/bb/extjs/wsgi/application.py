@@ -4,15 +4,9 @@ from bb.extjs.wsgi import interfaces
 from bb.extjs.wsgi.http import Request
 from bb.extjs.wsgi.http import Response
 
-from zope.component import getAdapters
-from zope.component import queryAdapter
+from zope.component import queryMultiAdapter
 
-from werkzeug.wsgi import responder
-from werkzeug.routing import Map, Rule
-from werkzeug.exceptions import NotFound
-from werkzeug.exceptions import HTTPException
-from werkzeug.exceptions import InternalServerError
-
+from webob.exc import HTTPNotFound
 
 
 class ExtJSApp(object):
@@ -24,23 +18,24 @@ class ExtJSApp(object):
 
     
     def dispatch_request(self, request):
-        mapper = Map()
+        name = request.path_info_peek()
+        if not name:
+            name = 'index'
         response = Response()
-        for name, dispatcher in getAdapters((request, response), interfaces.IRootDispatcher):
-            mapper.add(Rule(dispatcher.target, endpoint=dispatcher))
-            
-        adapter = mapper.bind_to_environ(request.environ)
+        dispatcher = queryMultiAdapter((request, response,), interfaces.IRootDispatcher , name)
         try:
+            if dispatcher is None:
+                raise HTTPNotFound('%s was not found' % name)
             transaction.begin()
-            dispatcher, values = adapter.match()
             dispatcher()
             transaction.commit()
+
             return response
         except Exception as e:
             handler = interfaces.IExceptionHandler(e)
             return handler()
         #except RetryException as e:
         #
-        # if we beginn to work with a sql database we properly
+        # if we begin to work with a sql database we properly
         # need to work with a RetryException. Show zope.publisher as
         # example and implement it here,

@@ -1,10 +1,11 @@
+import traceback
 import transaction
 
 from bb.extjs.core import extjs
 from bb.extjs.wsgi.interfaces import IExceptionHandler
 
-from werkzeug.exceptions import HTTPException
-from werkzeug.exceptions import InternalServerError
+from webob.exc import HTTPError
+from webob.exc import HTTPInternalServerError
 
 
 
@@ -21,7 +22,8 @@ class DefaultExceptionHandler(extjs.Adapter):
 
     def __call__(self):
         transaction.abort()
-        return InternalServerError(str(self.context))
+        print(traceback.format_exc())
+        return HTTPInternalServerError(str(self.context))
 
 
 @extjs.implementer(IExceptionHandler)
@@ -29,7 +31,7 @@ class DefaultHTTPExceptionHandler(extjs.Adapter):
     """ This is a default dummy adapter that do
         nothing else as return the same error.
     """
-    extjs.context(HTTPException)
+    extjs.context(HTTPError)
 
     def __call__(self):
         transaction.abort()
