@@ -1,9 +1,13 @@
 import transaction
 
+from bb.extjs.wsgi import events
 from bb.extjs.wsgi import interfaces
 from bb.extjs.wsgi.http import Request
 from bb.extjs.wsgi.http import Response
+from bb.extjs.core.interfaces import IApplicationContext
 
+from zope.event import notify
+from zope.component import queryUtility
 from zope.component import queryMultiAdapter
 
 from webob.exc import HTTPNotFound
@@ -21,16 +25,21 @@ class ExtJSApp(object):
         name = request.path_info_peek()
         if not name:
             name = 'index'
-        response = Response()
-        dispatcher = queryMultiAdapter((request, response,), interfaces.IRootDispatcher , name)
+        request.response = Response()
+        context = queryUtility(IApplicationContext)
+        if context is None:
+            NotImplemented('No utility found for IApplicationContext. Application can not be started.')
+        dispatcher = queryMultiAdapter((context, request), interfaces.IRootDispatcher , name)
         try:
             if dispatcher is None:
                 raise HTTPNotFound('%s was not found' % name)
+            notify(events.PreRequestProcessingEvent(context, request))
             transaction.begin()
             dispatcher()
             transaction.commit()
+            notify(events.PostRequestProcessingEvent(context, request))
 
-            return response
+            return request.response
         except Exception as e:
             handler = interfaces.IExceptionHandler(e)
             return handler()
