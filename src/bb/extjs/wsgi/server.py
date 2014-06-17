@@ -3,14 +3,31 @@ from waitress import serve
 from paste.deploy import loadapp
 
 import zope.component.hooks
+from zope.event import notify
+from zope.interface import implementer
 from zope.configuration import xmlconfig
 from zope.configuration import config as zconfig
 
 from bb.extjs.wsgi.application import ExtJSApp
+from bb.extjs.wsgi.events import ApplicationStartupEvent
+from bb.extjs.wsgi.interfaces import IApplicationSettings
+
+
+@implementer(IApplicationSettings)
+class ApplicationSettings(object):
+
+    def __init__(self, global_conf):
+        """ save the values that was
+           passed by wsgi server.
+        """
+        self.file = global_conf['__file__']
+        self.here = global_conf['here']
 
 
 def make_app(global_conf={}, config='', debug=False):
-    zcmlconfigure(global_conf)
+    settings = ApplicationSettings(global_conf)
+    zcmlconfigure(settings)
+    notify(ApplicationStartupEvent(settings))
     return ExtJSApp()
 
 
@@ -25,13 +42,13 @@ def run(config=None):
     serve(wsgi)
 
 
-def zcmlconfigure(ini_conf):
+def zcmlconfigure(settings):
     """ configuration for ZCML. The path to site.zcml must be 
         written in the ini-file and defined in the section
         'zcml' as 'path'.
     """
     parser = configparser.ConfigParser()
-    parser.read(ini_conf['__file__'])
+    parser.read(settings.file)
     zcmlpath = parser.get('zcml', 'path')
 
     # Hook up custom component architecture calls

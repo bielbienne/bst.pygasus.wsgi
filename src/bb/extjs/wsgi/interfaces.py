@@ -30,3 +30,11 @@ class IExceptionHandler(interface.Interface):
     def __call__(self, context):
         """ return an Exception of type werkzeug.exceptions.HTTPException.
         """
+
+
+class IApplicationSettings(interface.Interface):
+    """ hold data that was passed form wsgi server
+    """
+    
+    file = interface.Attribute('ini config file')
+    here = interface.Attribute('absolute path to parts/etc')
