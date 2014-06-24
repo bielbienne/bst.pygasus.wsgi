@@ -15,12 +15,12 @@ class IRootDispatcher(interface.Interface):
 
 
 class IRequest(interface.Interface):
-    """ 
+    """ Marker interface
     """
 
 
 class IResponse(interface.Interface):
-    """
+    """ Marker interface
     """
 
 
