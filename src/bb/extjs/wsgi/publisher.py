@@ -5,15 +5,17 @@ from bb.extjs.wsgi import interfaces
 from bb.extjs.wsgi.http import Request
 from bb.extjs.wsgi.http import Response
 from bb.extjs.core.interfaces import IApplicationContext
+from bb.extjs.core.interfaces import DEFAULT_EXTJS_APPLICATION
 
 from zope.event import notify
 from zope.component import queryUtility
+from zope.component.hooks import setSite
 from zope.component import queryMultiAdapter
 
 from webob.exc import HTTPNotFound
 
 
-class ExtJSApp(object):
+class Publisher(object):
     
     def __call__(self, environ, start_response):
         request = Request(environ)
@@ -22,17 +24,28 @@ class ExtJSApp(object):
 
     
     def dispatch_request(self, request):
-        name = request.path_info_peek()
-        if not name:
-            name = 'index'
         request.response = Response()
-        context = queryUtility(IApplicationContext)
+        
+        appname = request.path_info_peek()
+        if not appname:
+            appname = DEFAULT_EXTJS_APPLICATION
+        context = queryUtility(IApplicationContext, name=appname)
+
         if context is None:
-            NotImplemented('No utility found for IApplicationContext. Application can not be started.')
-        dispatcher = queryMultiAdapter((context, request), interfaces.IRootDispatcher , name)
+            raise NotImplementedError('No utility found for IApplicationContext. Application can not be started.')
+        # hooks context to local site manager
+        setSite(context)
+        request.path_info_pop()
+        dispatchname = request.path_info_peek()
+
+        dispatchname = request.path_info_peek()
+        if dispatchname is None:
+            dispatchname = 'index'
+        
+        dispatcher = queryMultiAdapter((context, request), interfaces.IRootDispatcher , dispatchname)
         try:
             if dispatcher is None:
-                raise HTTPNotFound('%s was not found' % name)
+                raise HTTPNotFound('%s was not found' % dispatchname)
             notify(events.PreRequestProcessingEvent(context, request))
             transaction.begin()
             dispatcher()

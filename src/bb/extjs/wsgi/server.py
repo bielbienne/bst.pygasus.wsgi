@@ -8,7 +8,7 @@ from zope.interface import implementer
 from zope.configuration import xmlconfig
 from zope.configuration import config as zconfig
 
-from bb.extjs.wsgi.application import ExtJSApp
+from bb.extjs.wsgi.publisher import Publisher
 from bb.extjs.wsgi.events import ApplicationStartupEvent
 from bb.extjs.wsgi.interfaces import IApplicationSettings
 
@@ -28,7 +28,7 @@ def make_app(global_conf={}, config='', debug=False):
     settings = ApplicationSettings(global_conf)
     zcmlconfigure(settings)
     notify(ApplicationStartupEvent(settings))
-    return ExtJSApp()
+    return Publisher()
 
 
 def make_debug(global_conf={}, config='', debug=False):
