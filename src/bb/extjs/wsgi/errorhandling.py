@@ -28,7 +28,7 @@ class DefaultExceptionHandler(ext.Adapter):
 
 @ext.implementer(IExceptionHandler)
 class DefaultHTTPExceptionHandler(ext.Adapter):
-    """ This is a default dummy adapter that do
+    """ This is a default adapter that do
         nothing else as return the same error.
     """
     ext.context(HTTPError)
