@@ -38,7 +38,6 @@ class Publisher(object):
         request.path_info_pop()
         dispatchname = request.path_info_peek()
 
-        dispatchname = request.path_info_peek()
         if dispatchname is None:
             dispatchname = 'index'
         
