@@ -34,6 +34,7 @@ def make_app(global_conf={}, config='', debug=False):
 def make_debug(global_conf={}, config='', debug=False):
     """ do nothing else at the moment as the function make_app!!
     """
+
     return make_app(global_conf, config, debug)
 
 
@@ -43,10 +44,11 @@ def run(config=None):
 
 
 def zcmlconfigure(settings):
-    """ configuration for ZCML. The path to site.zcml must be 
+    """ configuration for ZCML. The path to site.zcml must be
         written in the ini-file and defined in the section
         'zcml' as 'path'.
     """
+
     parser = configparser.ConfigParser()
     parser.read(settings.file)
     zcmlpath = parser.get('zcml', 'path')

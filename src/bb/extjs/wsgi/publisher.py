@@ -16,16 +16,15 @@ from webob.exc import HTTPNotFound
 
 
 class Publisher(object):
-    
+
     def __call__(self, environ, start_response):
         request = Request(environ)
         response = self.dispatch_request(request)
         return response(environ, start_response)
 
-    
     def dispatch_request(self, request):
         request.response = Response()
-        
+
         appname = request.path_info_peek()
         if not appname:
             appname = DEFAULT_EXTJS_APPLICATION
@@ -40,8 +39,8 @@ class Publisher(object):
 
         if dispatchname is None:
             dispatchname = 'index'
-        
-        dispatcher = queryMultiAdapter((context, request), interfaces.IRootDispatcher , dispatchname)
+
+        dispatcher = queryMultiAdapter((context, request), interfaces.IRootDispatcher, dispatchname)
         try:
             if dispatcher is None:
                 raise HTTPNotFound('%s was not found' % dispatchname)

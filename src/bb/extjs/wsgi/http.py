@@ -7,6 +7,7 @@ from bb.extjs.wsgi import interfaces
 class Request(webob.Request):
     pass
 
+
 @ext.implementer(interfaces.IResponse)
 class Response(webob.Response):
     pass

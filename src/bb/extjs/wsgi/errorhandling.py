@@ -8,13 +8,12 @@ from webob.exc import HTTPError
 from webob.exc import HTTPInternalServerError
 
 
-
 @ext.implementer(IExceptionHandler)
 class DefaultExceptionHandler(ext.Adapter):
     """ This adapter is for all exceptions types.
         It recreate the exceptions and send it as
         InternalServerError.
-        
+
         IN FUTURE WE SHOULD REMOVE THE ERROR MESSAGE FOR THE WEBUSER !!
     """
 

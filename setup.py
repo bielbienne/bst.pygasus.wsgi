@@ -21,15 +21,15 @@ setup(name='bb.extjs.wsgi',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
-        ],
+          "Programming Language :: Python",
+      ],
       keywords='',
       author='',
       author_email='',
       url='http://svn.plone.org/svn/collective/',
       license='gpl',
       packages=find_packages('src'),
-      package_dir = {'': 'src'},
+      package_dir={'': 'src'},
       namespace_packages=['bb', 'bb.extjs'],
       include_package_data=True,
       zip_safe=False,
@@ -43,7 +43,7 @@ setup(name='bb.extjs.wsgi',
       ],
       entry_points={
           'console_scripts': ['serve = bb.extjs.wsgi.server:run'],
-          'paste.app_factory' : ['main = bb.extjs.wsgi.server:make_app',
-                                 'debug = bb.extjs.wsgi.server:make_debug']
+          'paste.app_factory': ['main = bb.extjs.wsgi.server:make_app',
+                                'debug = bb.extjs.wsgi.server:make_debug']
       },
       )
