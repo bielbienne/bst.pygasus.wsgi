@@ -1,11 +1,11 @@
 import transaction
 
-from bb.extjs.wsgi import events
-from bb.extjs.wsgi import interfaces
-from bb.extjs.wsgi.http import Request
-from bb.extjs.wsgi.http import Response
-from bb.extjs.core.interfaces import IApplicationContext
-from bb.extjs.core.interfaces import DEFAULT_EXTJS_APPLICATION
+from bst.pygasus.wsgi import events
+from bst.pygasus.wsgi import interfaces
+from bst.pygasus.wsgi.http import Request
+from bst.pygasus.wsgi.http import Response
+from bst.pygasus.core.interfaces import IApplicationContext
+from bst.pygasus.core.interfaces import DEFAULT_EXTJS_APPLICATION
 
 from zope.event import notify
 from zope.component import queryUtility

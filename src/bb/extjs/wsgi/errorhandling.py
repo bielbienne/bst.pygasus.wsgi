@@ -1,8 +1,8 @@
 import traceback
 import transaction
 
-from bb.extjs.core import ext
-from bb.extjs.wsgi.interfaces import IExceptionHandler
+from bst.pygasus.core import ext
+from bst.pygasus.wsgi.interfaces import IExceptionHandler
 
 from webob.exc import HTTPError
 from webob.exc import HTTPInternalServerError

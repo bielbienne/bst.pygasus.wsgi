@@ -14,9 +14,9 @@ long_description = (
     open('CHANGES.txt').read()
     + '\n')
 
-setup(name='bb.extjs.wsgi',
+setup(name='bst.pygasus.wsgi',
       version=version,
-      description="WSGI Interface for bb.extjs",
+      description="WSGI Interface for bst.pygasus",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -30,7 +30,7 @@ setup(name='bb.extjs.wsgi',
       license='gpl',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      namespace_packages=['bb', 'bb.extjs'],
+      namespace_packages=['bb', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
@@ -42,8 +42,8 @@ setup(name='bb.extjs.wsgi',
           # -*- Extra requirements: -*-
       ],
       entry_points={
-          'console_scripts': ['serve = bb.extjs.wsgi.server:run'],
-          'paste.app_factory': ['main = bb.extjs.wsgi.server:make_app',
-                                'debug = bb.extjs.wsgi.server:make_debug']
+          'console_scripts': ['serve = bst.pygasus.wsgi.server:run'],
+          'paste.app_factory': ['main = bst.pygasus.wsgi.server:make_app',
+                                'debug = bst.pygasus.wsgi.server:make_debug']
       },
       )

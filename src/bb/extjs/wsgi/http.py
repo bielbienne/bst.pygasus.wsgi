@@ -1,6 +1,6 @@
 import webob
-from bb.extjs.core import ext
-from bb.extjs.wsgi import interfaces
+from bst.pygasus.core import ext
+from bst.pygasus.wsgi import interfaces
 
 
 @ext.implementer(interfaces.IRequest)

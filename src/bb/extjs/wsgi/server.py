@@ -8,9 +8,9 @@ from zope.interface import implementer
 from zope.configuration import xmlconfig
 from zope.configuration import config as zconfig
 
-from bb.extjs.wsgi.publisher import Publisher
-from bb.extjs.wsgi.events import ApplicationStartupEvent
-from bb.extjs.wsgi.interfaces import IApplicationSettings
+from bst.pygasus.wsgi.publisher import Publisher
+from bst.pygasus.wsgi.events import ApplicationStartupEvent
+from bst.pygasus.wsgi.interfaces import IApplicationSettings
 
 
 @implementer(IApplicationSettings)
