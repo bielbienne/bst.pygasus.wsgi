@@ -16,7 +16,11 @@ setup(name='bst.pygasus.wsgi',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-          "Programming Language :: Python",
+          'Programming Language :: Python :: 3',
+          'Natural Language :: English',
+          'License :: OSI Approved :: Zope Public License',
+          'Operating System :: OS Independent',
+          'Development Status :: 4 - Beta'
       ],
       keywords='pygasus web framework extjs',
       author='codeix',
@@ -28,13 +32,6 @@ setup(name='bst.pygasus.wsgi',
       namespace_packages=['bst', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
-      classifiers=[
-          'Programming Language :: Python :: 3',
-          'Natural Language :: English',
-          'License :: OSI Approved :: Zope Public License',
-          'Operating System :: OS Independent',
-          'Development Status :: 4 - Beta'
-      ],
       entry_points={
           'console_scripts': ['serve = bst.pygasus.wsgi.server:run'],
           'paste.app_factory': ['main = bst.pygasus.wsgi.server:make_app',
