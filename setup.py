@@ -4,42 +4,36 @@ import os
 version = '1.0'
 
 long_description = (
-    open('README.txt').read()
+    open('README.rst').read()
     + '\n' +
-    'Contributors\n'
-    '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.txt').read()
-    + '\n' +
-    open('CHANGES.txt').read()
+    open('CHANGES.rst').read()
     + '\n')
 
 setup(name='bst.pygasus.wsgi',
       version=version,
-      description="WSGI Interface for bst.pygasus",
+      description="WSGI Interface for bst.pygasus framework",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
           "Programming Language :: Python",
       ],
-      keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
-      license='gpl',
+      keywords='pygasus web framework extjs',
+      author='codeix',
+      author_email='samuel.riolo@biel-bienne.ch',
+      url='https://github.com/bielbienne/bst.pygasus.wsgi',
+      license='ZPL 2.1',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['bst', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'setuptools',
-          'Paste',
-          'PasteDeploy',
-          'waitress',
-          'transaction'
-          # -*- Extra requirements: -*-
+      classifiers=[
+          'Programming Language :: Python :: 3',
+          'Natural Language :: English',
+          'License :: OSI Approved :: Zope Public License',
+          'Operating System :: OS Independent',
+          'Development Status :: 4 - Beta'
       ],
       entry_points={
           'console_scripts': ['serve = bst.pygasus.wsgi.server:run'],
