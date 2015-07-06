@@ -32,6 +32,14 @@ setup(name='bst.pygasus.wsgi',
       namespace_packages=['bst', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
+      install_requires=[
+          'setuptools',
+          'Paste',
+          'PasteDeploy',
+          'waitress',
+          'transaction'
+          # -*- Extra requirements: -*-
+      ],
       entry_points={
           'console_scripts': ['serve = bst.pygasus.wsgi.server:run'],
           'paste.app_factory': ['main = bst.pygasus.wsgi.server:make_app',
