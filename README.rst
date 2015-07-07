@@ -18,11 +18,11 @@ bst.pygasus and all corresponding submodules are licensed under the ZPL 2.1, see
 References
 ==========
 
-Main Readme
+Main readme
     https://github.com/bielbienne/bst.pygasus.core
 
 Demonstration application
     https://github.com/bielbienne/bst.pygasus.demo
 
-Our Projects and Future plans with the Pygasus Framework
+Our projects and future plans with the Pygasus framework
     https://foss.biel-bienne.ch/
