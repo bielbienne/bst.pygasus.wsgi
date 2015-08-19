@@ -1,10 +1,10 @@
 Changelog
 =========
 
-1.1 (unreleased)
-================
+1.0.1 (unreleased)
+------------------
 
-- Nothing changed yet
+- Use complete MANIFEST.in
 
 
 1.0 (2015-08-03)
