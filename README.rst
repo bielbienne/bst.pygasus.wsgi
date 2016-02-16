@@ -19,10 +19,7 @@ References
 ==========
 
 Main readme
-    https://github.com/bielbienne/bst.pygasus.core
+    https://github.com/codeix/bst.pygasus.core
 
 Demonstration application
-    https://github.com/bielbienne/bst.pygasus.demo
-
-Our projects and future plans with the Pygasus framework
-    https://foss.biel-bienne.ch/
+    https://github.com/codeix/bst.pygasus.demo
